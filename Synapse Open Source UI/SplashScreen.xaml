@@ -1,0 +1,20 @@
+﻿<Window x:Class="Synapse_X_UI.SplashScreen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Synapse_X_UI"
+        mc:Ignorable="d"
+        Title="Synapse X - Splash Screen" Height="350" Width="720" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Topmost="True" AllowsTransparency="True" WindowStyle="None" Loaded="SplashScreen_OnLoaded" Background="{x:Null}" Icon="synapse_white.ico">
+    <Grid>
+        <Grid Name="logos" ZIndex="2">
+            <Image Name="loadLogo"  HorizontalAlignment="Center" Height="190" VerticalAlignment="Center" Width="196" Source="img/synapse_white.png" Panel.ZIndex="2" Stretch="Fill" Opacity="0" Margin="262,82,262,78"/>
+            <Label Name="loadText" Content="S Y N A P S E" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="24" Margin="270,268,302,40" Opacity="0" Panel.ZIndex="2"/>
+            <Label Name="loadTextX" Content="X" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="24" FontWeight="Bold" Margin="422,268,268,40" Opacity="0" Panel.ZIndex="2" Width="30"/>
+            <Label Name="statusText" Content="please wait..." HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" Margin="0,275,0,0" Opacity="0" Panel.ZIndex="2"/>
+        </Grid>
+        <Grid Name="circles">
+            <Ellipse Name="loadEllipse" Fill="#2F2F2F" HorizontalAlignment="Center" VerticalAlignment="Center" Height="0" Width="0" Panel.ZIndex="1" Margin="0,0,0,0"></Ellipse>
+        </Grid>
+    </Grid>
+</Window>

@@ -1,0 +1,348 @@
+#include "../../Exploit/Misc/Static.hpp"
+
+#include "./SysHook.hpp"
+
+#include "../../Utilities/Utils.hpp"
+
+#include <string>
+#include <iomanip>
+
+namespace syn::SysHook
+{
+	enum HookEngineType
+	{
+		W7_X64,
+		W7_X86,
+		W8_X64,
+		W10_X64,
+
+		//Catch all for AutoLaunch
+		AUTOLAUNCH_ALL
+	};
+
+	DWORD Wow64Jmp;
+	DWORD Wow64DirectCall;
+	DWORD HookMap;
+	HookEngineType Type;
+
+	BYTE Wow64Direct[] =
+	{
+		//jmp 0033:0
+		0xEA, 0x00, 0x00, 0x00, 0x00, 0x33, 0x00,
+		//add [rax], al
+		0x00, 0x00
+	};
+
+	__declspec(naked) static void Wow64Hook()
+	{
+		__asm
+		{
+			cmp eax, 200000
+			jge TransitionOut
+
+			mov edx, [HookMap]
+			mov edx, [edx + eax * 4]
+			cmp edx, 0
+			je TransitionOut
+			add esp, 4
+			jmp edx
+
+			TransitionOut:
+			jmp Wow64Jmp
+		}
+	}
+
+	__declspec(naked) static void Wow64HookW7()
+	{
+		__asm
+		{
+			cmp eax, 200000
+			jge TransitionOut
+
+			push edx
+			mov edx, [HookMap]
+			mov edx, [edx + eax * 4]
+			cmp edx, 0
+			je TransitionOut
+			add esp, 8
+			jmp edx
+
+			TransitionOut:
+			pop edx
+			jmp [Wow64DirectCall]
+		}
+	}
+
+	__declspec(naked) static void Wow64HookW8()
+	{
+		__asm
+		{
+			cmp eax, 200000
+			jge TransitionOut
+
+			mov edx, [HookMap]
+			mov edx, [edx + eax * 4]
+			cmp edx, 0
+			je TransitionOut
+			add esp, 4
+			jmp edx
+
+			TransitionOut:
+			jmp [Wow64DirectCall]
+		}
+	}
+
+	__declspec(naked) static void SysEnterHookW7()
+	{
+		__asm
+		{
+			cmp eax, 200000
+			jge TransitionOut
+
+			mov edx, [HookMap]
+			mov edx, [edx + eax * 4]
+			cmp edx, 0
+			je TransitionOut
+			add esp, 4
+			jmp edx
+
+			TransitionOut:
+			mov edx, esp
+			//sysenter
+			__asm _emit 0x0F
+			__asm _emit 0x34
+			ret
+		}
+	}
+
+	__declspec(naked) static void SysEnterDirectCall()
+	{
+		__asm
+		{
+			mov edx, esp
+			//sysenter
+			__asm _emit 0x0F
+			__asm _emit 0x34
+			ret
+		}
+	}
+
+	__declspec(naked) static void AutoLaunchNtHook()
+	{
+		__asm
+		{
+			mov edx, [HookMap]
+			mov edx, [edx + eax * 4]
+			jmp edx
+		}
+	}
+
+	bool Setup(BOOL AutoLaunch)
+	{
+		HookMap = (DWORD) malloc(4 * 250000);
+		SecureZeroMemory((void*) HookMap, 4 * 250000);
+
+        VM_DOLPHIN_RED_START;
+
+		const auto NtQVM = (DWORD) syn::FindProcAddress(syn::ntdll, OBFUSCATE_STR("NtQueryVirtualMemory"));
+
+		//mov eax, <syscall>
+		if (*(BYTE*)NtQVM != 0xB8) return false;
+
+		if (AutoLaunch)
+		{
+			//AutoLaunch hooking is done in the Hook function
+			Wow64Jmp = (DWORD) AutoLaunchNtHook;
+			Type = AUTOLAUNCH_ALL;
+
+			return true;
+		}
+
+		if (Is64BitOS())
+		{
+			//mov edx, <Wow64Transition>
+			if (*(BYTE*)(NtQVM + 5) == 0xBA)
+			{
+				//Windows 10 implementation - we can hook the Wow64Transition early.
+				Type = W10_X64;
+
+				//jmp dword ptr [ntdll.Wow64Transition]
+				const auto TransitionAddr = *(DWORD*)(NtQVM + 6);
+				const auto Wow64Transition = *(DWORD*)(TransitionAddr + 2);
+				Wow64Jmp = *(DWORD*) Wow64Transition;
+
+				DWORD OldProtect, OldProtect2;
+				syn::SafeVirtualProtect((void*) Wow64Transition, 4, PAGE_EXECUTE_READWRITE, &OldProtect);
+				*(DWORD*)Wow64Transition = (DWORD) Wow64Hook;
+				syn::SafeVirtualProtect((void*) Wow64Transition, 4, OldProtect, &OldProtect2);
+
+                FlushInstructionCache(syn::RobloxProcess, (LPCVOID)Wow64Transition, 4);
+
+				return true;
+			}
+			else if (*(BYTE*)(NtQVM + 5) == 0x33 || *(BYTE*)(NtQVM + 5) == 0x64)
+			{
+				//Windows 7 implementation - we can hook Wow64Transition too, but we have do it at a 'later' stage.
+				if (*(BYTE*)(NtQVM + 5) == 0x33)
+				{
+					Type = W7_X64;
+				}
+				else
+				{
+					Type = W8_X64;
+				}
+
+				const auto Wow64Transition = __readfsdword(0xC0);
+				const auto Wow64Real = *(DWORD*)(Wow64Transition + 1);
+
+				const auto Alloc = (DWORD)VirtualAlloc(NULL, 1024, MEM_COMMIT | MEM_RESERVE, PAGE_EXECUTE_READWRITE);
+				ProtectedMemory::GetSingleton()->Add(Alloc, 1024);
+				memcpy((void*) Alloc, (void*) Wow64Direct, sizeof Wow64Direct);
+				*(DWORD*)((DWORD)Alloc + 0x1) = Wow64Real;
+
+				if (Type == W7_X64)
+				{
+					Wow64Jmp = (DWORD) Wow64HookW7;
+				}
+				else
+				{
+
+					Wow64Jmp = (DWORD) Wow64HookW8;
+				}
+
+				Wow64DirectCall = (DWORD) Alloc;
+
+				DWORD OldProtect, OldProtect2;
+
+				syn::SafeVirtualProtect((void*) Wow64Transition, 6, PAGE_EXECUTE_READWRITE, &OldProtect);
+				//jmp dword ptr [Wow64Jmp]
+				*(WORD*)Wow64Transition = 0x25FF;
+				*(DWORD*)(Wow64Transition + 2) = (DWORD) &Wow64Jmp;
+				syn::SafeVirtualProtect((void*) Wow64Transition, 6, OldProtect, &OldProtect2);
+
+                FlushInstructionCache(syn::RobloxProcess, (LPCVOID)Wow64Transition, 6);
+
+				return true;
+			}
+		}
+		else
+		{
+			//mov edx, <Wow64Transition>
+			if (*(BYTE*)(NtQVM + 5) == 0xBA)
+			{
+				//Windows 7 x86 implementation - we can hook KiFastSystemCall
+				Type = W7_X86;
+
+				const auto KiFastSystemCall = **(DWORD**)(NtQVM + 6);
+
+				Wow64Jmp = (DWORD) SysEnterHookW7;
+				Wow64DirectCall = (DWORD) SysEnterDirectCall;
+
+				DWORD OldProtect, OldProtect2;
+
+				auto JmpLoc = KiFastSystemCall - 0xB;
+
+				syn::SafeVirtualProtect((void*) JmpLoc, 0x100, PAGE_EXECUTE_READWRITE, &OldProtect);
+
+				//jmp dword ptr [Wow64Jmp]
+				*(WORD*)JmpLoc = 0x25FF;
+				*(DWORD*)(JmpLoc + 2) = (DWORD) &Wow64Jmp;
+				*(BYTE*)(JmpLoc + 6) = 0x90;
+
+				//jmp -0xB
+				*(BYTE*)KiFastSystemCall = 0xEB;
+				*(BYTE*)(KiFastSystemCall + 1) = 0xF3;
+
+				syn::SafeVirtualProtect((void*) JmpLoc, 0x100, OldProtect, &OldProtect2);
+
+                FlushInstructionCache(syn::RobloxProcess, NULL, NULL);
+
+				return true;
+			}
+		}
+
+        VM_DOLPHIN_RED_END;
+
+		return false;
+	}
+
+	uintptr_t Hook(const uintptr_t NtFunc, const uintptr_t To)
+	{
+        VM_DOLPHIN_RED_START;
+            
+		if (*(BYTE*)NtFunc != 0xB8) return 0;
+
+		const auto RHookMap = (DWORD*) HookMap;
+		RHookMap[*(DWORD*)(NtFunc + 1)] = To;
+
+		if (Type == W10_X64)
+		{
+			const auto Alloc = (DWORD) VirtualAlloc(NULL, 1024, MEM_COMMIT | MEM_RESERVE, PAGE_EXECUTE_READWRITE);
+			ProtectedMemory::GetSingleton()->Add(Alloc, 1024);
+			memcpy((void*) Alloc, (void*) NtFunc, 0x10);
+			*(DWORD*)(Alloc + 6) = Wow64Jmp;
+
+			return Alloc;
+		}
+		else if (Type == W7_X86)
+		{
+			const auto Alloc = (DWORD) VirtualAlloc(NULL, 1024, MEM_COMMIT | MEM_RESERVE, PAGE_EXECUTE_READWRITE);
+			ProtectedMemory::GetSingleton()->Add(Alloc, 1024);
+			memcpy((void*) Alloc, (void*) NtFunc, 0x10);
+			*(DWORD*)(Alloc + 6) = (DWORD) &Wow64DirectCall;
+
+			return Alloc;
+		}
+		else if (Type == W7_X64)
+		{
+			const auto Alloc = (DWORD) VirtualAlloc(NULL, 1024, MEM_COMMIT | MEM_RESERVE, PAGE_EXECUTE_READWRITE);
+			ProtectedMemory::GetSingleton()->Add(Alloc, 1024);
+			memcpy((void*) Alloc, (void*) NtFunc, 0x20);
+
+			//call dword ptr [DirectCall]
+			*(WORD*)(Alloc + 0xB) = 0x15FF;
+			*(DWORD*)(Alloc + 0xD) = (DWORD) &Wow64DirectCall;
+			//nop (as extra byte left over)
+			*(BYTE*)(Alloc + 0x11) = 0x90;
+
+			return Alloc;
+		}
+		else if (Type == W8_X64)
+		{
+			const auto Alloc = (DWORD) VirtualAlloc(NULL, 1024, MEM_COMMIT | MEM_RESERVE, PAGE_EXECUTE_READWRITE);
+			ProtectedMemory::GetSingleton()->Add(Alloc, 1024);
+			memcpy((void*) Alloc, (void*) NtFunc, 0x20);
+
+			//call dword ptr [DirectCall]
+			*(WORD*)(Alloc + 0x5) = 0x15FF;
+			*(DWORD*)(Alloc + 0x7) = (DWORD) &Wow64DirectCall;
+			//nop (as extra byte left over)
+			*(BYTE*)(Alloc + 0xB) = 0x90;
+
+			return Alloc;
+		}
+		else if (Type == AUTOLAUNCH_ALL)
+		{
+			const auto Alloc = (DWORD) VirtualAlloc(NULL, 1024, MEM_COMMIT | MEM_RESERVE, PAGE_EXECUTE_READWRITE);
+			ProtectedMemory::GetSingleton()->Add(Alloc, 1024);
+			memcpy((void*) Alloc, (void*) NtFunc, 0x100);
+
+			DWORD JmpLoc = NtFunc + 5;
+
+			//jmp dword ptr [Wow64Jmp]
+			DWORD OldProtect, OldProtect2;
+			syn::SafeVirtualProtect((void*) JmpLoc, 10, PAGE_EXECUTE_READWRITE, &OldProtect);
+			*(WORD*)JmpLoc = 0x25FF;
+			*(DWORD*)(JmpLoc + 2) = (DWORD) &Wow64Jmp;
+			syn::SafeVirtualProtect((void*) JmpLoc, 10, OldProtect, &OldProtect2);
+
+            FlushInstructionCache(syn::RobloxProcess, (LPCVOID)JmpLoc, 10);
+
+			return Alloc;
+		}
+
+        VM_DOLPHIN_RED_END;
+
+		return 0;
+	}
+}

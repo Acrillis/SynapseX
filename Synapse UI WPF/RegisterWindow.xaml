@@ -1,0 +1,40 @@
+﻿<Window x:Class="Synapse_UI_WPF.RegisterWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Synapse_UI_WPF"
+        mc:Ignorable="d"
+        Title="Synapse X - Registration" ResizeMode="NoResize" Topmost="True" WindowStyle="None" Height="200" Width="536" Background="#FF333333" Loaded="Window_Loaded" Closing="Window_Closing" MouseDown="Window_MouseDown">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid HorizontalAlignment="Left" Height="30" Margin="0,0,0,0" VerticalAlignment="Top" Width="536" Background="#FF3C3C3C">
+            <Label Name="TitleBox" Content="Synapse X - Registration" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Foreground="White"/>
+            <Button Name="CloseButton" Content="X" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" HorizontalAlignment="Right" VerticalAlignment="Top" Width="22" Foreground="White" Click="CloseButton_Click"/>
+            <Button Name="MiniButton" Content="_" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" HorizontalAlignment="Right" VerticalAlignment="Top" Width="22" Foreground="White" Margin="0,0,22,0" Click="MiniButton_Click"/>
+            <Image x:Name="IconBox" Source="sxlogosmallwhite_OJJ_icon.ico" HorizontalAlignment="Left" Margin="6,1,0,0" VerticalAlignment="Top"/>
+        </Grid>
+
+        <Label Content="Username:" HorizontalAlignment="Left" Margin="16,4.6,0,0" Grid.Row="1" VerticalAlignment="Top" Foreground="White" RenderTransformOrigin="0.656,0.403" FontSize="14"/>
+        <TextBox Name="UsernameBox" HorizontalAlignment="Left" BorderThickness="0" Height="26" Margin="95,6.6,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="431" Background="#FF232323" Foreground="White" FontSize="14"/>
+
+        <Label Content="Password:" HorizontalAlignment="Left" Margin="20,36.6,0,0" Grid.Row="1" VerticalAlignment="Top" Foreground="White" RenderTransformOrigin="0.656,0.403" FontSize="14"/>
+        <PasswordBox Name="PasswordBox" HorizontalAlignment="Left" BorderThickness="0" Height="26" Margin="95,37.6,0,0" Grid.Row="1" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="431" Background="#FF232323" Foreground="White" FontSize="14"/>
+
+        <Label Content="Email:" HorizontalAlignment="Left" Margin="44,66.6,0,0" Grid.Row="1" VerticalAlignment="Top" Foreground="White" RenderTransformOrigin="0.656,0.403" FontSize="14"/>
+        <TextBox Name="EmailBox" HorizontalAlignment="Left" BorderThickness="0" Height="26" Margin="95,68.6,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="431" Background="#FF232323" Foreground="White" FontSize="14"/>
+        
+        <Label Content="Serial Key:" HorizontalAlignment="Left" Margin="19,96.6,0,0" Grid.Row="1" VerticalAlignment="Top" Foreground="White" RenderTransformOrigin="0.656,0.403" FontSize="14"/>
+        <TextBox Name="SerialKeyBox" HorizontalAlignment="Left" BorderThickness="0" Height="26" Margin="95,99.6,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalContentAlignment="Center" VerticalAlignment="Top" Width="431" Background="#FF232323" Foreground="White" FontSize="14"/>
+
+        <Button Name="RegisterButton" Content="Register" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" HorizontalAlignment="Left" Margin="20,130.6,0,0" Grid.Row="1" VerticalAlignment="Top" Background="#FF3C3C3C" Foreground="White" FontSize="14" Width="506" Height="32" Click="RegisterButton_Click"/>
+    </Grid>
+</Window>

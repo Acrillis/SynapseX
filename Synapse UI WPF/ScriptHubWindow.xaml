@@ -1,0 +1,32 @@
+﻿<Window x:Class="Synapse_UI_WPF.ScriptHubWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Synapse_UI_WPF"
+        mc:Ignorable="d"
+        Title="Synapse X - Script Hub" ResizeMode="NoResize" Topmost="True" WindowStyle="None" Height="336" Width="439" Background="#FF333333" Loaded="Window_Loaded" MouseDown="Window_MouseDown" Closing="Window_Closing">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Name="TopBox" HorizontalAlignment="Left" Height="30" Margin="0,0,0,0" VerticalAlignment="Top" Width="439" Background="#FF3C3C3C">
+            <Label Name="TitleBox" Content="Synapse X - Script Hub" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Foreground="White"/>
+            <Image x:Name="IconBox" Source="sxlogosmallwhite_OJJ_icon.ico" HorizontalAlignment="Left" Margin="2,0,0,0" VerticalAlignment="Top"/>
+            <Button Name="MiniButton" Content="_" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" HorizontalAlignment="Right" VerticalAlignment="Top" Width="22" Foreground="White" Click="MiniButton_Click"/>
+        </Grid>
+
+        <ListBox Name="ScriptBox" BorderThickness="0" HorizontalAlignment="Left" Height="286" Margin="10,9.6,0,0" Grid.Row="1" VerticalAlignment="Top" Width="115" Background="#FF3C3C3C" Foreground="White" SelectionChanged="ScriptBox_SelectionChanged"/>
+        <Image Name="ScriptPictureBox" HorizontalAlignment="Left" Height="170" Margin="130,9.6,0,0" Grid.Row="1" VerticalAlignment="Top" Width="299"/>
+        <TextBox IsReadOnly="True" Name="DescriptionBox" BorderThickness="0" HorizontalAlignment="Left" Height="80" Margin="130,184.6,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="299" Background="#FF1E1E1E" Foreground="White"/>
+
+        <Button Name="ExecuteButton" Content="Execute" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Background="#FF3C3C3C" HorizontalAlignment="Left" Margin="130,269.6,0,0" Grid.Row="1" VerticalAlignment="Top" Width="149" Foreground="White" Click="ExecuteButton_Click" Height="26"/>
+        <Button Name="CloseButton" Content="Close" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Background="#FF3C3C3C" HorizontalAlignment="Left" Margin="284,269.6,0,0" Grid.Row="1" VerticalAlignment="Top" Width="145" Foreground="White" Click="CloseButton_Click" Height="26"/>
+    </Grid>
+</Window>

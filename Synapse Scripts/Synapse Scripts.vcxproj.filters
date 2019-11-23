@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Lua">
+      <UniqueIdentifier>{7b8c9bd9-c854-40ca-acf2-9590057ee127}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Python">
+      <UniqueIdentifier>{8af0e785-fdbb-4883-91d5-9abca6b6496d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Text">
+      <UniqueIdentifier>{359d9306-60f7-453e-8b59-f363f431dcc5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="AutoUpdate.py">
+      <Filter>Python</Filter>
+    </None>
+    <None Include="InitScript.lua">
+      <Filter>Lua</Filter>
+    </None>
+    <None Include="JailbreakHaxx.lua">
+      <Filter>Lua</Filter>
+    </None>
+    <None Include="PFHaxx.lua">
+      <Filter>Lua</Filter>
+    </None>
+    <None Include="StreamSniper.lua">
+      <Filter>Lua</Filter>
+    </None>
+    <None Include="MadCityHaxx.lua">
+      <Filter>Lua</Filter>
+    </None>
+    <None Include="Elym.lua">
+      <Filter>Lua</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="AutoUpdateCurrent.txt">
+      <Filter>Text</Filter>
+    </Text>
+  </ItemGroup>
+</Project>

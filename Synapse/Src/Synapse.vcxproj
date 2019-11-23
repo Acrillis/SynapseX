@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="PseudoDebug|Win32">
+      <Configuration>PseudoDebug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="PseudoDebug|x64">
+      <Configuration>PseudoDebug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{FB6543A2-122A-40FA-920B-7EC9671B90F3}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>Synapse</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+    <UseOfMfc>Static</UseOfMfc>
+    <SpectreMitigation>false</SpectreMitigation>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+    <SpectreMitigation>false</SpectreMitigation>
+    <UseOfMfc>Static</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='PseudoDebug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+    <SpectreMitigation>false</SpectreMitigation>
+    <UseOfMfc>Static</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>NotSet</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>NotSet</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='PseudoDebug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>NotSet</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='PseudoDebug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='PseudoDebug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='PseudoDebug|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)Release\</OutDir>
+    <IntDir>Release\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='PseudoDebug|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>CPPHTTPLIB_OPENSSL_SUPPORT;_CRT_SECURE_NO_WARNINGS;_DEBUG;CURL_STATICLIB;ZYDIS_STATIC_DEFINE</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\Dependencies\freetype\include;$(ProjectDir)..\Dependencies\DirectX\include;$(ProjectDir)..\Dependencies\Zydis\include;$(ProjectDir)..\Dependencies\cpr\include;$(ProjectDir)..\Dependencies\CryptoPP\include;$(ProjectDir)..\Dependencies\cURL\include;$(ProjectDir)..\Dependencies\Themida\include;$(ProjectDir)..\Dependencies\mbedTLS\include;$(ProjectDir)..\DirectX\mbedTLS\include;$(ProjectDir)..\Dependencies\PolyHook\include;$(ProjectDir)..\Dependencies\OpenSSL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalOptions>
+      </AdditionalOptions>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>Crypt32.lib;Wldap32.lib;Normaliz.lib;DbgHelp.lib;Shlwapi.lib;Comdlg32.lib;Shell32.lib;Ole32.lib;Winhttp.lib;$(ProjectDir)..\Dependencies\CryptoPP\lib\cryptlibd.lib;$(ProjectDir)..\Dependencies\cURL\lib\libcurld.lib;$(ProjectDir)..\Dependencies\DirectX\lib\d3d11.lib;$(ProjectDir)..\Dependencies\DirectX\lib\d3dcompiler.lib;$(ProjectDir)..\Dependencies\Zydis\lib\Zydisd.lib;$(ProjectDir)..\Dependencies\mbedTLS\lib\mbedTLS.lib;$(ProjectDir)..\Dependencies\PolyHook\lib\PolyHook_2d.lib;$(ProjectDir)..\Dependencies\PolyHook\lib\capstoned.lib;$(ProjectDir)..\Dependencies\PolyHook\lib\asmjitd.lib;$(ProjectDir)..\Dependencies\freetype\lib\freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SectionAlignment>
+      </SectionAlignment>
+      <AdditionalOptions>
+      </AdditionalOptions>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\Dependencies\Themida\lib\;$(ProjectDir)..\Dependencies\DirectX\lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SectionAlignment>
+      </SectionAlignment>
+      <AdditionalOptions>
+      </AdditionalOptions>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;CURL_STATICLIB;ZYDIS_STATIC_DEFINE;CV_X32_INSERT_VIA_INLINE</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\Dependencies\freetype\include;$(ProjectDir)..\Dependencies\DirectX\include;$(ProjectDir)..\Dependencies\Zydis\include;$(ProjectDir)..\Dependencies\cpr\include;$(ProjectDir)..\Dependencies\CryptoPP\include;$(ProjectDir)..\Dependencies\cURL\include;$(ProjectDir)..\Dependencies\Themida\include;$(ProjectDir)..\Dependencies\PolyHook\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <UseIntelOptimizedHeaders>false</UseIntelOptimizedHeaders>
+      <DebugInformationFormat>None</DebugInformationFormat>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <StringPooling>true</StringPooling>
+      <OmitFramePointers>false</OmitFramePointers>
+      <DisableSpecificWarnings>4733</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <AdditionalDependencies>Crypt32.lib;Wldap32.lib;ws2_32.lib;Normaliz.lib;DbgHelp.lib;Shlwapi.lib;Comdlg32.lib;Shell32.lib;Ole32.lib;Winhttp.lib;$(ProjectDir)..\Dependencies\CryptoPP\lib\cryptlib.lib;$(ProjectDir)..\Dependencies\cURL\lib\libcurl.lib;$(ProjectDir)..\Dependencies\DirectX\lib\d3d11.lib;$(ProjectDir)..\Dependencies\DirectX\lib\d3dcompiler.lib;$(ProjectDir)..\Dependencies\Zydis\lib\Zydis.lib;$(ProjectDir)..\Dependencies\PolyHook\lib\PolyHook_2.lib;$(ProjectDir)..\Dependencies\PolyHook\lib\capstone.lib;$(ProjectDir)..\Dependencies\PolyHook\lib\asmjit.lib;$(ProjectDir)..\Dependencies\freetype\lib\freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalOptions>/NODEFAULTLIB:MSVCRT</AdditionalOptions>
+      <SectionAlignment>
+      </SectionAlignment>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\Dependencies\Themida\lib\;$(ProjectDir)..\Dependencies\DirectX\lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='PseudoDebug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;CURL_STATICLIB;ZYDIS_STATIC_DEFINE;_PSEUDO_DEBUG</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\Dependencies\freetype\include;$(ProjectDir)..\Dependencies\DirectX\include;$(ProjectDir)..\Dependencies\Zydis\include;$(ProjectDir)..\Dependencies\cpr\include;$(ProjectDir)..\Dependencies\CryptoPP\include;$(ProjectDir)..\Dependencies\cURL\include;$(ProjectDir)..\Dependencies\Themida\include;$(ProjectDir)..\Dependencies\mbedTLS\include;$(ProjectDir)..\DirectX\mbedTLS\include;$(ProjectDir)..\Dependencies\OpenSSL\include;$(ProjectDir)..\Dependencies\PolyHook\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <UseIntelOptimizedHeaders>false</UseIntelOptimizedHeaders>
+      <DebugInformationFormat>None</DebugInformationFormat>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <StringPooling>true</StringPooling>
+      <OmitFramePointers>false</OmitFramePointers>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>DebugFull</GenerateDebugInformation>
+      <AdditionalDependencies>Crypt32.lib;Wldap32.lib;Normaliz.lib;DbgHelp.lib;Shlwapi.lib;Comdlg32.lib;Shell32.lib;Ole32.lib;Winhttp.lib;$(ProjectDir)..\Dependencies\CryptoPP\lib\cryptlib.lib;$(ProjectDir)..\Dependencies\cURL\lib\libcurl.lib;$(ProjectDir)..\Dependencies\DirectX\lib\d3d11.lib;$(ProjectDir)..\Dependencies\DirectX\lib\d3dcompiler.lib;$(ProjectDir)..\Dependencies\Zydis\lib\Zydis.lib;$(ProjectDir)..\Dependencies\mbedTLS\lib\mbedTLS.lib;$(ProjectDir)..\Dependencies\PolyHook\lib\PolyHook_2.lib;$(ProjectDir)..\Dependencies\PolyHook\lib\capstone.lib;$(ProjectDir)..\Dependencies\PolyHook\lib\asmjit.lib;$(ProjectDir)..\Dependencies\freetype\lib\freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalOptions>/NODEFAULTLIB:MSVCRT</AdditionalOptions>
+      <SectionAlignment>
+      </SectionAlignment>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\Dependencies\Themida\lib\;$(ProjectDir)..\Dependencies\DirectX\lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SectionAlignment>
+      </SectionAlignment>
+      <AdditionalOptions>
+      </AdditionalOptions>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='PseudoDebug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SectionAlignment>
+      </SectionAlignment>
+      <AdditionalOptions>
+      </AdditionalOptions>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="Exploit\Execution\Conversion\RbxLuauConversion.hpp" />
+    <ClInclude Include="Exploit\Execution\Lorraine\half.hpp" />
+    <ClInclude Include="Exploit\Execution\Lorraine\lorraine_across.hpp" />
+    <ClInclude Include="Exploit\Execution\Lorraine\lorraine_device.hpp" />
+    <ClInclude Include="Exploit\Execution\Lorraine\lorraine_llex.hpp" />
+    <ClInclude Include="Exploit\Execution\Lorraine\lorraine_uir.hpp" />
+    <ClInclude Include="Exploit\Execution\RbxInstance.hpp" />
+    <ClInclude Include="Exploit\Execution\Virtual Machine\HSVM.hpp" />
+    <ClInclude Include="Exploit\Execution\Virtual Machine\VMBase.hpp" />
+    <ClInclude Include="Exploit\Misc\AutoBin.hpp" />
+    <ClInclude Include="Exploit\Misc\CallingConvention.hpp" />
+    <ClInclude Include="Exploit\Misc\ExplorerIcons.hpp" />
+    <ClInclude Include="Exploit\Misc\Fonts.hpp" />
+    <ClInclude Include="Exploit\Misc\PointerObfuscation.hpp" />
+    <ClInclude Include="Exploit\Misc\Profiler.hpp" />
+    <ClInclude Include="Exploit\Misc\Resource.hpp" />
+    <ClInclude Include="Exploit\Misc\Structures.hpp" />
+    <ClInclude Include="Exploit\Security\AntiDebug.hpp" />
+    <ClInclude Include="Exploit\Security\AntiDump.hpp" />
+    <ClInclude Include="Exploit\Security\AntiProxy.hpp" />
+    <ClInclude Include="Exploit\Security\AntiTamper.hpp" />
+    <ClInclude Include="Exploit\Security\FunctionReader.hpp" />
+    <ClInclude Include="Exploit\Security\SysHook.hpp" />
+    <ClInclude Include="Source Dependencies\cpr\api.h" />
+    <ClInclude Include="Source Dependencies\cpr\auth.h" />
+    <ClInclude Include="Source Dependencies\cpr\body.h" />
+    <ClInclude Include="Source Dependencies\cpr\cookies.h" />
+    <ClInclude Include="Source Dependencies\cpr\cpr.h" />
+    <ClInclude Include="Source Dependencies\cpr\cprtypes.h" />
+    <ClInclude Include="Source Dependencies\cpr\curlholder.h" />
+    <ClInclude Include="Source Dependencies\cpr\defines.h" />
+    <ClInclude Include="Source Dependencies\cpr\digest.h" />
+    <ClInclude Include="Source Dependencies\cpr\error.h" />
+    <ClInclude Include="Source Dependencies\cpr\low_speed.h" />
+    <ClInclude Include="Source Dependencies\cpr\max_redirects.h" />
+    <ClInclude Include="Source Dependencies\cpr\multipart.h" />
+    <ClInclude Include="Source Dependencies\cpr\parameters.h" />
+    <ClInclude Include="Source Dependencies\cpr\payload.h" />
+    <ClInclude Include="Source Dependencies\cpr\proxies.h" />
+    <ClInclude Include="Source Dependencies\cpr\response.h" />
+    <ClInclude Include="Source Dependencies\cpr\session.h" />
+    <ClInclude Include="Source Dependencies\cpr\ssl_options.h" />
+    <ClInclude Include="Source Dependencies\cpr\timeout.h" />
+    <ClInclude Include="Source Dependencies\cpr\util.h" />
+    <ClInclude Include="Source Dependencies\httplib\httplib.h" />
+    <ClInclude Include="Source Dependencies\httplib\webclient.h" />
+    <ClInclude Include="Source Dependencies\ImGUI\imgui_freetype.h" />
+    <ClInclude Include="Source Dependencies\xxtea\xxtea.h" />
+    <ClInclude Include="Utilities\Buffer.hpp" />
+    <ClInclude Include="curl\curl.h" />
+    <ClInclude Include="curl\curlver.h" />
+    <ClInclude Include="curl\easy.h" />
+    <ClInclude Include="curl\mprintf.h" />
+    <ClInclude Include="curl\multi.h" />
+    <ClInclude Include="curl\stdcheaders.h" />
+    <ClInclude Include="curl\system.h" />
+    <ClInclude Include="curl\typecheck-gcc.h" />
+    <ClInclude Include="Exploit\Misc\D3D.hpp" />
+    <ClInclude Include="Exploit\Misc\Exception.hpp" />
+    <ClInclude Include="Exploit\Security\DataBin.hpp" />
+    <ClInclude Include="Utilities\Console.hpp" />
+    <ClInclude Include="Exploit\Misc\HttpStatus.hpp" />
+    <ClInclude Include="Source Dependencies\ImGUI\imconfig.h" />
+    <ClInclude Include="Source Dependencies\ImGUI\imgui.h" />
+    <ClInclude Include="Source Dependencies\ImGUI\imgui_impl_dx11.h" />
+    <ClInclude Include="Source Dependencies\ImGUI\imgui_impl_win32.h" />
+    <ClInclude Include="Source Dependencies\ImGUI\imgui_internal.h" />
+    <ClInclude Include="Source Dependencies\ImGUI\imstb_rectpack.h" />
+    <ClInclude Include="Source Dependencies\ImGUI\imstb_textedit.h" />
+    <ClInclude Include="Source Dependencies\ImGUI\imstb_truetype.h" />
+    <ClInclude Include="Source Dependencies\json\json.hpp" />
+    <ClInclude Include="Exploit\Security\MemCheck.hpp" />
+    <ClInclude Include="Exploit\Execution\Conversion\ObfusDumper.hpp" />
+    <ClInclude Include="Exploit\Execution\RbxApi.hpp" />
+    <ClInclude Include="Exploit\Execution\Conversion\RbxConversion.hpp" />
+    <ClInclude Include="Exploit\Execution\RbxLua.hpp" />
+    <ClInclude Include="Utilities\FakeMemoryHasher.hpp" />
+    <ClInclude Include="Utilities\Fill.hpp" />
+    <ClInclude Include="Utilities\Hashing\fnv.hpp" />
+    <ClInclude Include="Utilities\Hashing\XXHash32.h" />
+    <ClInclude Include="Utilities\Hashing\XXHash64.h" />
+    <ClInclude Include="Utilities\Hashing\XXHash\xxh3.h" />
+    <ClInclude Include="Utilities\Hashing\XXHash\xxhash.h" />
+    <ClInclude Include="Utilities\MemSpoofer.hpp" />
+    <ClInclude Include="Utilities\Obfuscation\ObfuscatedString.hpp" />
+    <ClInclude Include="Utilities\Obfuscation\ObfuscatedMember.hpp" />
+    <ClInclude Include="Utilities\Obfuscation\ObfuscatedNumber.hpp" />
+    <ClInclude Include="Utilities\Obfuscation\ObfuscatedStringTea.hpp" />
+    <ClInclude Include="Utilities\Obfuscation\Random.hpp" />
+    <ClInclude Include="Source Dependencies\Lua\lapi.h" />
+    <ClInclude Include="Source Dependencies\Lua\lauxlib.h" />
+    <ClInclude Include="Source Dependencies\Lua\lcode.h" />
+    <ClInclude Include="Source Dependencies\Lua\ldebug.h" />
+    <ClInclude Include="Source Dependencies\Lua\ldo.h" />
+    <ClInclude Include="Source Dependencies\Lua\lfunc.h" />
+    <ClInclude Include="Source Dependencies\Lua\lgc.h" />
+    <ClInclude Include="Source Dependencies\Lua\llex.h" />
+    <ClInclude Include="Source Dependencies\Lua\llimits.h" />
+    <ClInclude Include="Source Dependencies\Lua\lmem.h" />
+    <ClInclude Include="Source Dependencies\Lua\lobject.h" />
+    <ClInclude Include="Source Dependencies\Lua\lopcodes.h" />
+    <ClInclude Include="Source Dependencies\Lua\lparser.h" />
+    <ClInclude Include="Source Dependencies\Lua\lstate.h" />
+    <ClInclude Include="Source Dependencies\Lua\lstring.h" />
+    <ClInclude Include="Source Dependencies\Lua\ltable.h" />
+    <ClInclude Include="Source Dependencies\Lua\ltm.h" />
+    <ClInclude Include="Source Dependencies\Lua\lua.h" />
+    <ClInclude Include="Source Dependencies\Lua\luaconf.h" />
+    <ClInclude Include="Source Dependencies\Lua\lualib.h" />
+    <ClInclude Include="Source Dependencies\Lua\lundump.h" />
+    <ClInclude Include="Source Dependencies\Lua\lvm.h" />
+    <ClInclude Include="Source Dependencies\Lua\lzio.h" />
+    <ClInclude Include="Exploit\Execution\Conversion\RbxOp.hpp" />
+    <ClInclude Include="Exploit\Security\PEBUnlink.hpp" />
+    <ClInclude Include="Utilities\Hashing\sha512.h" />
+    <ClInclude Include="Exploit\Misc\Static.hpp" />
+    <ClInclude Include="Exploit\Execution\Scheduler.hpp" />
+    <ClInclude Include="Exploit\Security\Fingerprint.hpp" />
+    <ClInclude Include="Source Dependencies\ImGUITextEditor\TextEditor.h" />
+    <ClInclude Include="Utilities\Scanner.hpp" />
+    <ClInclude Include="Utilities\Spoofer.hpp" />
+    <ClInclude Include="Utilities\SafeQueue.hpp" />
+    <ClInclude Include="Utilities\Utils.hpp" />
+    <ClInclude Include="Utilities\WinReg.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Exploit\Execution\Conversion\RbxConversion.cpp" />
+    <ClCompile Include="Exploit\Execution\Conversion\RbxLuauConversion.cpp" />
+    <ClCompile Include="Exploit\Execution\Lorraine\lorraine_device.cpp" />
+    <ClCompile Include="Exploit\Execution\Lorraine\lorraine_llex.cpp" />
+    <ClCompile Include="Exploit\Execution\Lorraine\lorraine_uir.cpp" />
+    <ClCompile Include="Exploit\Execution\RbxApi.cpp" />
+    <ClCompile Include="Exploit\Execution\RbxLua.cpp" />
+    <ClCompile Include="Exploit\Execution\RbxYield.cpp" />
+    <ClCompile Include="Exploit\Execution\RbxInstance.cpp" />
+    <ClCompile Include="Exploit\Execution\Scheduler.cpp" />
+    <ClCompile Include="Exploit\Execution\Virtual Machine\HSVM.cpp" />
+    <ClCompile Include="Exploit\Misc\D3D.cpp" />
+    <ClCompile Include="Exploit\Misc\PointerObfuscation.cpp" />
+    <ClCompile Include="Exploit\Misc\Static.cpp" />
+    <ClCompile Include="Exploit\Misc\Structures.cpp" />
+    <ClCompile Include="Exploit\Security\AntiDump.cpp" />
+    <ClCompile Include="Exploit\Security\AntiTamper.cpp" />
+    <ClCompile Include="Exploit\Security\FunctionReader.cpp" />
+    <ClCompile Include="Exploit\Security\SysHook.cpp" />
+    <ClCompile Include="Source Dependencies\cpr\auth.cpp" />
+    <ClCompile Include="Source Dependencies\cpr\cookies.cpp" />
+    <ClCompile Include="Source Dependencies\cpr\cprtypes.cpp" />
+    <ClCompile Include="Source Dependencies\cpr\digest.cpp" />
+    <ClCompile Include="Source Dependencies\cpr\error.cpp" />
+    <ClCompile Include="Source Dependencies\cpr\multipart.cpp" />
+    <ClCompile Include="Source Dependencies\cpr\parameters.cpp" />
+    <ClCompile Include="Source Dependencies\cpr\payload.cpp" />
+    <ClCompile Include="Source Dependencies\cpr\proxies.cpp" />
+    <ClCompile Include="Source Dependencies\cpr\session.cpp" />
+    <ClCompile Include="Source Dependencies\cpr\ssl_options.cpp" />
+    <ClCompile Include="Source Dependencies\cpr\timeout.cpp" />
+    <ClCompile Include="Source Dependencies\cpr\util.cpp" />
+    <ClCompile Include="Source Dependencies\ImGUI\imgui_freetype.cpp" />
+    <ClCompile Include="Source Dependencies\xxtea\xxtea.c" />
+    <ClCompile Include="Utilities\Buffer.cpp" />
+    <ClCompile Include="Exploit\Misc\Entry.cpp" />
+    <ClCompile Include="Source Dependencies\ImGUI\imgui.cpp" />
+    <ClCompile Include="Source Dependencies\ImGUI\imgui_demo.cpp" />
+    <ClCompile Include="Source Dependencies\ImGUI\imgui_draw.cpp" />
+    <ClCompile Include="Source Dependencies\ImGUI\imgui_impl_dx11.cpp" />
+    <ClCompile Include="Source Dependencies\ImGUI\imgui_impl_win32.cpp" />
+    <ClCompile Include="Source Dependencies\ImGUI\imgui_widgets.cpp" />
+    <ClCompile Include="Source Dependencies\Lua\lapi.c" />
+    <ClCompile Include="Source Dependencies\Lua\lauxlib.c" />
+    <ClCompile Include="Source Dependencies\Lua\lbaselib.c" />
+    <ClCompile Include="Source Dependencies\Lua\lcode.c" />
+    <ClCompile Include="Source Dependencies\Lua\ldblib.c" />
+    <ClCompile Include="Source Dependencies\Lua\ldebug.c" />
+    <ClCompile Include="Source Dependencies\Lua\ldo.c" />
+    <ClCompile Include="Source Dependencies\Lua\ldump.c" />
+    <ClCompile Include="Source Dependencies\Lua\lfunc.c" />
+    <ClCompile Include="Source Dependencies\Lua\lgc.c" />
+    <ClCompile Include="Source Dependencies\Lua\linit.c" />
+    <ClCompile Include="Source Dependencies\Lua\liolib.c" />
+    <ClCompile Include="Source Dependencies\Lua\llex.c" />
+    <ClCompile Include="Source Dependencies\Lua\lmathlib.c" />
+    <ClCompile Include="Source Dependencies\Lua\lmem.c" />
+    <ClCompile Include="Source Dependencies\Lua\loadlib.c" />
+    <ClCompile Include="Source Dependencies\Lua\lobject.c" />
+    <ClCompile Include="Source Dependencies\Lua\lopcodes.c" />
+    <ClCompile Include="Source Dependencies\Lua\loslib.c" />
+    <ClCompile Include="Source Dependencies\Lua\lparser.c" />
+    <ClCompile Include="Source Dependencies\Lua\lstate.c" />
+    <ClCompile Include="Source Dependencies\Lua\lstring.c" />
+    <ClCompile Include="Source Dependencies\Lua\lstrlib.c" />
+    <ClCompile Include="Source Dependencies\Lua\ltable.c" />
+    <ClCompile Include="Source Dependencies\Lua\ltablib.c" />
+    <ClCompile Include="Source Dependencies\Lua\ltm.c" />
+    <ClCompile Include="Source Dependencies\Lua\lundump.c" />
+    <ClCompile Include="Source Dependencies\Lua\lvm.c" />
+    <ClCompile Include="Source Dependencies\Lua\lzio.c" />
+    <ClCompile Include="Exploit\Security\MemCheck.cpp" />
+    <ClCompile Include="Exploit\Security\HookedFunctions.cpp" />
+    <ClCompile Include="Utilities\FakeMemoryHasher.cpp" />
+    <ClCompile Include="Utilities\Hashing\sha512.cpp" />
+    <ClCompile Include="Source Dependencies\ImGUITextEditor\TextEditor.cpp" />
+    <ClCompile Include="Utilities\Hashing\XXHash\xxhash.c" />
+    <ClCompile Include="Utilities\Utils.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Exploit\Misc\Flags.hpp" />
+    <None Include="Exploit\Misc\Updated.hpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets" />
+</Project>
